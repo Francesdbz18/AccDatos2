@@ -1,11 +1,11 @@
 package org.example;
 
-import com.db4o.Db4oEmbedded;
-import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
+//import com.db4o.Db4oEmbedded;
+//import com.db4o.ObjectContainer;
+//import com.db4o.ObjectSet;
 
 public class Consulta1 {
-    static String BDPer = "DBPersonas.yap";
+    /* static String BDPer = "DBPersonas.yap";
     public static void main(String[] args) {
         ObjectContainer db = Db4oEmbedded.openFile (Db4oEmbedded.newConfiguration(), BDPer);
         Persona per = new Persona (null, null);
@@ -19,5 +19,5 @@ public class Consulta1 {
                 System.out.printf("Nombre: %s, Ciudad: %s in", p.getNombre(), p.getCiudad());
             }
         } db.close();
-    }
+    } */
 }
