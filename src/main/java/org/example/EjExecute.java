@@ -6,8 +6,18 @@ public class EjExecute {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection ("jdbc:mysql://localhost:3306/hospitales", "CHESCADMIN", "1234");
-            String sql = "SELECT FROM dept";
-            Statement sentencia = boolean valor conexion.createStatement(); sentencia.execute(sql); if (valor) { ResultSet rs sentencia.getResultSet(); while (rs.next()) System.out.printf("%d, %s, %s %n", rs.getInt(1), rs.getString(2), rs.getString(3)); rs.close(); } else { int f sentencia.getUpdateCount(); System.out.printf("Filas afectadas:%d %n", f); } sentencia.close();
+            //construir orden CREATE VIEW
+            StringBuilder sql = new StringBuilder();
+            sql.append("CREATE OR REPLACE VIEW totales ");
+            sql.append("(dep, dnombre, nemp, media) AS ");
+            sql.append("SELECT d.dept_no, dnombre, COUNT (emp_no), AVG(salario) ");
+            sql.append("FROM departamentos d LEFT JOIN empleados e ");
+            sql.append("ON e.dept_no = d.dept_no");
+            sql.append("GROUP BY d.dept_no, dnombre ");
+            System.out.println(sql);
+            Statement sentencia = conexion.createStatement();
+            int filas = sentencia.executeUpdate(sql.toString());
+            System.out.printf("Resultado de la ejecución: %d %n", filas);
             conexion.close();
         } catch (ClassNotFoundException | SQLException cn) {
             cn.printStackTrace();
